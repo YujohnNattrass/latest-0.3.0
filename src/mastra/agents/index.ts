@@ -2,7 +2,7 @@ import { openai } from '@ai-sdk/openai';
 import { Agent } from '@mastra/core/agent';
 import { Memory } from '@mastra/memory';
 import { weatherTool } from '../tools';
-import { LibSQLVector } from '@mastra/core/vector/libsql';
+import { LibSQLVector } from '@mastra/libsql';
 
 
 const memory = new Memory({
@@ -34,4 +34,3 @@ export const weatherAgent = new Agent({
   memory: memory,
 });
 
-weatherAgent.commit();
