@@ -2,6 +2,18 @@ import { openai } from '@ai-sdk/openai';
 import { Agent } from '@mastra/core/agent';
 import { Memory } from '@mastra/memory';
 import { weatherTool } from '../tools';
+import { LibSQLVector } from '@mastra/core/vector/libsql';
+
+
+const memory = new Memory({
+  options: {
+    lastMessages: 10,
+  },
+  vector: new LibSQLVector({
+    connectionUrl: 'file:../memory.db'
+  })
+});
+
 
 export const weatherAgent = new Agent({
   name: 'Weather Agent',
@@ -19,13 +31,7 @@ export const weatherAgent = new Agent({
 `,
   model: openai('gpt-4o'),
   tools: { weatherTool },
-  memory: new Memory({
-    options: {
-      lastMessages: 10,
-      semanticRecall: false,
-      threads: {
-        generateTitle: false,
-      },
-    },
-  }),
+  memory: memory,
 });
+
+weatherAgent.commit();
