@@ -2,7 +2,7 @@ import { openai } from '@ai-sdk/openai';
 import { Agent } from '@mastra/core/agent';
 import { Memory } from '@mastra/memory';
 import { weatherTool } from '../tools';
-import { LibSQLVector } from '@mastra/libsql';
+import { LibSQLVector } from '@mastra/core/vector/libsql';
 
 
 const memory = new Memory({
